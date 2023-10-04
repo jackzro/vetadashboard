@@ -13,8 +13,7 @@ function Dashboard() {
 
   return (
     <main className="flex h-screen">
-      <>cobaa</>
-      {/* {isLoading === false && (
+      {isLoading === false && (
         <>
           <Sidebar company={company} />
           {isBranch?.status === false ? (
@@ -23,7 +22,7 @@ function Dashboard() {
             <BranchSide iotgateway={isBranch?.iotgateway} />
           )}
         </>
-      )} */}
+      )}
     </main>
   );
 }
