@@ -102,7 +102,7 @@ const authOptions: NextAuthOptions = {
         sameSite: "lax",
         path: "/",
         secure: true,
-        domain: ".veta.co.id",
+        domain: "solar.veta.co.id",
       },
     },
   },
