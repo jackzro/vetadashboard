@@ -90,6 +90,7 @@ const authOptions: NextAuthOptions = {
         accessToken: token.accessToken,
         refreshToken: token.refreshToken,
       };
+      console.log("session", session);
       return session;
     },
   },
@@ -100,8 +101,8 @@ const authOptions: NextAuthOptions = {
         httpOnly: true,
         sameSite: "lax",
         path: "/",
-        domain: ".veta.co.id",
         secure: true,
+        domain: ".veta.co.id",
       },
     },
   },
