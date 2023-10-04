@@ -100,6 +100,7 @@ const authOptions: NextAuthOptions = {
         httpOnly: true,
         sameSite: "lax",
         path: "/",
+        domain: ".veta.co.id",
         secure: true,
       },
     },
