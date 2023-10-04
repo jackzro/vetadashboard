@@ -16,9 +16,9 @@ export default function Home() {
   // const { mutate: createProduct } = useCreateProduct();
   const queryClient = useQueryClient();
 
-  useEffect(() => {
-    redirect("/dashboard");
-  }, []);
+  // useEffect(() => {
+  //   redirect("/dashboard");
+  // }, []);
 
   // const handleAdd = (e: any) => {
   //   e.preventDefault();
@@ -42,6 +42,7 @@ export default function Home() {
 
   return (
     <main>
+      main
       {/* {products.map((data) => (
         <div key={data.id}>{data.name}</div>
       ))} */}
@@ -51,12 +52,10 @@ export default function Home() {
         data?.pages.map((page: any) => {
           console.log(page);
         })} */}
-
       {/* <form>
         <Input onChange={(e) => setCust(e.target.value)} />
         <Button onClick={handleAdd}>Click Me</Button>
       </form> */}
-
       {/* <Link href={"/map"}> go to</Link> */}
     </main>
   );
