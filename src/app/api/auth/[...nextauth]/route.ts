@@ -98,11 +98,11 @@ const authOptions: NextAuthOptions = {
     sessionToken: {
       name: `__Secure-next-auth.session-token`,
       options: {
-        httpOnly: true,
+        httpOnly: false,
         sameSite: "lax",
         path: "/",
-        secure: true,
-        domain: "solar.veta.co.id",
+        secure: false,
+        domain: ".veta.co.id",
       },
     },
   },
