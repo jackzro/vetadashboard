@@ -13,16 +13,17 @@ function Dashboard() {
 
   return (
     <main className="flex h-screen">
-      {isLoading === false && (
+      <>cobaa</>
+      {/* {isLoading === false && (
         <>
           <Sidebar company={company} />
           {isBranch?.status === false ? (
             <MainSide />
           ) : (
-            <BranchSide iotgateway={isBranch.iotgateway} />
+            <BranchSide iotgateway={isBranch?.iotgateway} />
           )}
         </>
-      )}
+      )} */}
     </main>
   );
 }
