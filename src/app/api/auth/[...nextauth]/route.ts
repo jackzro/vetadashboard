@@ -28,7 +28,10 @@ const authOptions: NextAuthOptions = {
   providers: [
     CredentialProvider({
       name: "credentials",
-      credentials: {},
+      credentials: {
+        email: { label: "Email", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
+      },
       //@ts-ignore
       async authorize(credentials, req) {
         const { email, password } = credentials as loginType;
