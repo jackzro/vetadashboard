@@ -92,9 +92,6 @@ const authOptions: NextAuthOptions = {
       };
       return session;
     },
-    async signIn() {
-      return true;
-    },
   },
   cookies: {
     // sessionToken: {
