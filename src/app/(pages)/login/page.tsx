@@ -9,6 +9,21 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { LogIn } from "lucide-react";
 import Image from "next/image";
+import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
+import { UserPool } from "@/utils/userPool";
+
+function asyncAuthenticateUser(
+  cognitoUser: any,
+  cognitoAuthenticationDetails: any
+) {
+  return new Promise(function (resolve, reject) {
+    cognitoUser.authenticateUser(cognitoAuthenticationDetails, {
+      onSuccess: resolve,
+      onFailure: reject,
+      newPasswordRequired: resolve,
+    });
+  });
+}
 
 function Login() {
   const {
@@ -24,22 +39,43 @@ function Login() {
   const login = async (data: any, e: any) => {
     e.preventDefault();
     try {
-      const res = await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-        // callbackUrl: "/dashboard",
-      });
+      const authenticationData = {
+        Username: data.email,
+        Password: data.password,
+      };
+      const authenticationDetails = new AuthenticationDetails(
+        authenticationData
+      );
+      const userData = {
+        Username: data.email,
+        Pool: UserPool,
+      };
+      const cognitoUser = new CognitoUser(userData);
 
-      //@ts-ignore
-      if (res?.error !== null) {
-        toast.error("Incorrect Login Details!!");
-      } else {
-        console.log(res);
-        setDisable(false);
-        toast.success("Login Successful!!");
-        // router.push("/dashboard");
-      }
+      try {
+        const result = await asyncAuthenticateUser(
+          cognitoUser,
+          authenticationDetails
+        );
+        console.log(result);
+      } catch (error) {}
+      // const res = await signIn("credentials", {
+      //   email: data.email,
+      //   password: data.password,
+      //   redirect: false,
+      //   // callbackUrl: "/dashboard",
+      // });
+
+      // //@ts-ignore
+      // if (res?.error !== null) {
+      //   console.log(res);
+      //   toast.error("Incorrect Login Details!!");
+      // } else {
+      //   console.log(res);
+      //   setDisable(false);
+      //   toast.success("Login Successful!!");
+      //   // router.push("/dashboard");
+      // }
     } catch (error: any) {
       toast.error(error);
       return error;
