@@ -93,18 +93,18 @@ const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  cookies: {
-    // sessionToken: {
-    //   name: `__Secure-next-auth.session-token`,
-    //   options: {
-    //     httpOnly: false,
-    //     sameSite: "lax",
-    //     path: "/",
-    //     secure: false,
-    //     domain: ".veta.co.id",
-    //   },
-    // },
-  },
+  // cookies: {
+  //   sessionToken: {
+  //     name: `__Secure-next-auth.session-token`,
+  //     options: {
+  //       httpOnly: false,
+  //       sameSite: "lax",
+  //       path: "/",
+  //       secure: false,
+  //       domain: ".veta.co.id",
+  //     },
+  //   },
+  // },
 };
 
 //@ts-ignore
