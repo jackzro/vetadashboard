@@ -35,9 +35,10 @@ function Login() {
       if (res?.error !== null) {
         toast.error("Incorrect Login Details!!");
       } else {
+        console.log(res);
         setDisable(false);
         toast.success("Login Successful!!");
-        router.push("/dashboard");
+        // router.push("/dashboard");
       }
     } catch (error: any) {
       toast.error(error);
