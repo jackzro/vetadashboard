@@ -24,22 +24,21 @@ function Login() {
   const login = async (data: any, e: any) => {
     e.preventDefault();
     try {
-      router.push("/dashboard/chart");
-      // const res = await signIn("credentials", {
-      //   email: data.email,
-      //   password: data.password,
-      //   redirect: false,
-      //   // callbackUrl: "/dashboard",
-      // });
+      const res = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+        // callbackUrl: "/dashboard",
+      });
 
-      // //@ts-ignore
-      // if (res?.error !== null) {
-      //   toast.error("Incorrect Login Details!!");
-      // } else {
-      //   toast.success("Login Successful!!");
-      //   router.push("/dashboard");
-      //   setDisable(false);
-      // }
+      //@ts-ignore
+      if (res?.error !== null) {
+        toast.error("Incorrect Login Details!!");
+      } else {
+        setDisable(false);
+        toast.success("Login Successful!!");
+        router.push("/dashboard");
+      }
     } catch (error: any) {
       toast.error(error);
       return error;
