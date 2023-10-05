@@ -52,7 +52,10 @@ function BranchSide({ iotgateway }: any) {
     // create "a" HTML element with href to file & click
     const link = document.createElement("a");
     link.href = href;
-    link.setAttribute("download", "todat.xlsx"); //or any other extension
+    link.setAttribute(
+      "download",
+      `${data.serial_number}-[${data.month}-${data.year}].xlsx`
+    ); //or any other extension
     document.body.appendChild(link);
     link.click();
 

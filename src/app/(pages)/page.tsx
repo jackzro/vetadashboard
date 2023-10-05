@@ -16,9 +16,9 @@ export default function Home() {
   // const { mutate: createProduct } = useCreateProduct();
   const queryClient = useQueryClient();
 
-  // useEffect(() => {
-  //   redirect("/dashboard");
-  // }, []);
+  useEffect(() => {
+    redirect("/dashboard");
+  }, []);
 
   // const handleAdd = (e: any) => {
   //   e.preventDefault();
