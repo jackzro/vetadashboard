@@ -90,21 +90,23 @@ const authOptions: NextAuthOptions = {
         accessToken: token.accessToken,
         refreshToken: token.refreshToken,
       };
-      console.log("session", session);
       return session;
+    },
+    async signIn() {
+      return true;
     },
   },
   cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
-      options: {
-        httpOnly: false,
-        sameSite: "lax",
-        path: "/",
-        secure: false,
-        domain: ".veta.co.id",
-      },
-    },
+    // sessionToken: {
+    //   name: `__Secure-next-auth.session-token`,
+    //   options: {
+    //     httpOnly: false,
+    //     sameSite: "lax",
+    //     path: "/",
+    //     secure: false,
+    //     domain: ".veta.co.id",
+    //   },
+    // },
   },
 };
 
