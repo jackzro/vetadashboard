@@ -33,6 +33,8 @@ const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         const { email, password } = credentials as loginType;
 
+        console.log("cre", credentials);
+
         const authenticationData = {
           Username: email,
           Password: password,
@@ -64,6 +66,7 @@ const authOptions: NextAuthOptions = {
 
           return res;
         } catch (error) {
+          console.log("ini error", error);
           //@ts-ignore
           throw new Error(error.code);
         }
