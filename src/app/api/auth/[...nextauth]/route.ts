@@ -33,8 +33,6 @@ const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         const { email, password } = credentials as loginType;
 
-        console.log("cre", credentials);
-
         const authenticationData = {
           Username: email,
           Password: password,
@@ -53,7 +51,6 @@ const authOptions: NextAuthOptions = {
             cognitoUser,
             authenticationDetails
           );
-          console.log("result", result);
           //@ts-ignore
           let res = {
             //@ts-ignore
