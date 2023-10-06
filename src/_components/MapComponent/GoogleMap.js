@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   GoogleMap,
   InfoWindowF as InfoWindow,
@@ -7,6 +7,11 @@ import {
   useLoadScript,
   // MarkerClustererF as MarkerClusterer,
 } from "@react-google-maps/api";
+
+const OPTIONS = {
+  minZoom: 2,
+  maxZoom: 10,
+};
 
 function MapGoogle({ data }) {
   const googleKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY;
@@ -33,7 +38,7 @@ function MapGoogle({ data }) {
       onLoad={handleOnLoad}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: "100%", height: "50vh" }}
-      zoom={8}
+      options={OPTIONS}
     >
       {data.map(
         ({
