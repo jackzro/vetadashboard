@@ -49,13 +49,13 @@ function Login() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-gray-400 to-gray-700">
       <form
         onSubmit={handleSubmit(login)}
-        className="flex flex-col p-4 rounded-md items-center justify-center md:w-[30%] w-[50%] bg-slate-200"
+        className="flex flex-col p-4 rounded-md items-center justify-center lg:w-[30%] w-[80%] sm:w-[50%] bg-slate-200"
       >
         <div className="w-[100px]">
           <Image
             alt="Veta Logo"
-            // src="/img/veta.png"
-            src="https://veta.co.id/wp-content/uploads/2023/06/3@4x-8-2048x825.png"
+            src="/img/veta.png"
+            // src="https://veta.co.id/wp-content/uploads/2023/06/3@4x-8-2048x825.png"
             width={100}
             height={100}
           />

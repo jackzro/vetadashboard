@@ -7,19 +7,19 @@ interface CompanyState {
 }
 
 export const useCompanyStore = create((set) => ({
+  companies: [],
   company: {},
   isBranch: {
     status: false,
     iotgateway: {},
   },
+
+  setCompanies: (companies: any) =>
+    set((state: any) => ({ companies: [...state.companies, companies] })),
   setCompany: (company: any) => {
     set((state: any) => ({ company: company }));
   },
   setIsBranch: (status: any) => {
     set((state: any) => ({ isBranch: status }));
   },
-  //   product: [{ id: "1", name: "jack" }],
-  //   addProduct: (product: Product) =>
-  //     set((state) => ({ product: [...state.product, product] })),
-  //   setProduct: () => {},
 }));

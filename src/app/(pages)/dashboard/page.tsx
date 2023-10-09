@@ -10,6 +10,13 @@ import BranchSide from "@/_components/Main/BranchSide";
 function Dashboard() {
   const { data: company, isLoading } = useGetCompany();
   const isBranch = useCompanyStore((state: any) => state.isBranch);
+  const setCompanies = useCompanyStore((state: any) => state.setCompanies);
+
+  React.useEffect(() => {
+    if (isLoading === false) {
+      setCompanies(company);
+    }
+  }, [company]);
 
   return (
     <main className="flex h-screen">
