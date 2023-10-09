@@ -16,7 +16,7 @@ function Dashboard() {
     if (isLoading === false) {
       setCompanies(company);
     }
-  }, [company]);
+  }, [company, isLoading, setCompanies]);
 
   return (
     <main className="flex h-screen">
