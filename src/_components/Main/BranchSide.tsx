@@ -68,7 +68,7 @@ function BranchSide({ iotgateway }: any) {
   };
   return (
     <div className="container mx-auto py-2">
-      {isLoading === false ? (
+      {isLoading === false && data !== undefined ? (
         <>
           <div className="py-2 flex flex-col sm:flex-row justify-between ">
             <div className="space-y-2">
