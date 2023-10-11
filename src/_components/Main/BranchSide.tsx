@@ -25,7 +25,7 @@ function BranchSide({ iotgateway }: any) {
     year
   );
 
-  const { refetch: download, data: excelFile } = useGenerateInvoice(
+  const { refetch: download } = useGenerateInvoice(
     iotgateway.serial_number,
     month,
     year
@@ -46,24 +46,26 @@ function BranchSide({ iotgateway }: any) {
   };
 
   const downloadInvoice = async () => {
-    download();
-    const href = URL.createObjectURL(excelFile);
+    const excelFile: any = await download();
 
-    // create "a" HTML element with href to file & click
-    const link = document.createElement("a");
-    link.href = href;
-    link.setAttribute(
-      "download",
-      `${data.serial_number}-[${data.month}-${data.year}].xlsx`
-    ); //or any other extension
-    document.body.appendChild(link);
-    link.click();
+    if (excelFile) {
+      const href = URL.createObjectURL(excelFile.data);
 
-    // clean up "a" element & remove ObjectURL
-    document.body.removeChild(link);
-    URL.revokeObjectURL(href);
+      // create "a" HTML element with href to file & click
+      const link = document.createElement("a");
+      link.href = href;
+      link.setAttribute(
+        "download",
+        `${data.serial_number}-[${data.month}-${data.year}].xlsx`
+      ); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+
+      // clean up "a" element & remove ObjectURL
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+    }
   };
-
   return (
     <div className="container mx-auto py-2">
       {isLoading === false ? (
@@ -138,7 +140,9 @@ function BranchSide({ iotgateway }: any) {
             </>
           )}
         </>
-      ) : null}
+      ) : (
+        <div>Belum ada Data </div>
+      )}
     </div>
   );
 }

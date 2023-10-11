@@ -82,7 +82,7 @@ export const useGetBilling = (
   useQuery({
     queryFn: () => getBilling(serial_number, month, year),
     queryKey: ["billing", serial_number, month, year],
-    refetchInterval: 10000,
+    retry: false,
   });
 
 export const getGenerateInvoice = (
@@ -103,5 +103,6 @@ export const useGenerateInvoice = (
   useQuery({
     queryFn: () => getGenerateInvoice(serial_number, month, year),
     queryKey: ["invoice", serial_number, month, year],
-    refetchInterval: 10000,
+    enabled: false,
+    staleTime: Infinity,
   });
