@@ -9,8 +9,9 @@ import { columns } from "../Billing/Column";
 import { columnsSummary } from "../Billing/ColumnSummary";
 import { columnsSummaryGrid } from "../Billing/ColumnSummaryGrid";
 import { columnsUsage } from "../Billing/ColumnUsage";
-import { DataTable } from "../Billing/DataTable";
+import DataTable from "../Billing/DataTable";
 import { ComboboxTypeEnergyView } from "../DropDownMenu/TableMenu";
+import CustomInputCalender from "../CustomCalenderInput";
 
 function BranchSide({ iotgateway }: any) {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -67,23 +68,11 @@ function BranchSide({ iotgateway }: any) {
     }
   };
 
-  const CustomCalenderInput = forwardRef(
-    ({ value, onClick }: any, ref: any) => (
-      <Button
-        className="flex items-center justify-center space-x-2"
-        onClick={onClick}
-        ref={ref}
-      >
-        <CalendarDays className="h-6 w-6" />
-        <span>{value}</span>
-      </Button>
-    )
-  );
   return (
     <div className="container mx-auto py-2 dark:bg-zinc-800">
       {isLoading === false && data !== undefined ? (
         <>
-          <div className="py-2 flex flex-col sm:flex-row space-y-6 justify-between">
+          <div className="py-2 flex flex-col sm:flex-row justify-between">
             <div className="space-y-2 flex flex-col">
               <span className="space-y-2 flex flex-col">
                 <span>
@@ -105,7 +94,7 @@ function BranchSide({ iotgateway }: any) {
                     selected={date}
                     dateFormat="MM/yyyy"
                     onChange={handleBillingByDate}
-                    customInput={<CustomCalenderInput />}
+                    customInput={<CustomInputCalender />}
                   />
                   {data["daily_energy_usage"].length !== 0 ? (
                     <Button onClick={downloadInvoice} className="bg-veta">
@@ -137,11 +126,9 @@ function BranchSide({ iotgateway }: any) {
               </span>
             </div>
           </div>
-
-          <div className="my-10">
+          <div className="py-6">
             <ComboboxTypeEnergyView value={type} setValue={setType} />
           </div>
-
           {type === "energy captured" || type === "energy usage" ? (
             <DataTable
               columns={type === "energy captured" ? columns : columnsUsage}

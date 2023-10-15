@@ -22,44 +22,44 @@ import Sidebar from "./Side/Sidebar";
 import { useCompanyStore } from "@/store/CompanyStore";
 import { Input } from "@/components/ui/input";
 
-export const ItemLink = React.memo(({ label, href, icon }: any) => {
-  return (
-    <Button variant="ghost" key={label}>
-      <span>{icon}</span>
-      <Link
-        key={label}
-        href={href}
-        className="text-sm font-medium transition-colors"
-      >
-        {label}
-      </Link>
-    </Button>
-  );
-});
+// export const ItemLink = React.memo(({ label, href, icon }: any) => {
+//   return (
+//     <Button variant="ghost" key={label}>
+//       <span>{icon}</span>
+//       <Link
+//         key={label}
+//         href={href}
+//         className="text-sm font-medium transition-colors"
+//       >
+//         {label}
+//       </Link>
+//     </Button>
+//   );
+// });
 
-function Header() {
+const Header = () => {
   const companies = useCompanyStore((state: any) => state.companies);
   const { theme, setTheme } = useTheme();
   const routes = [
     {
       href: "/dashboard",
       label: "Home",
-      icon: <Home />,
+      icon: () => <Home />,
     },
     {
       href: "/dashboard",
       label: "Monitor",
-      icon: <Monitor />,
+      icon: () => <Monitor />,
     },
     {
       href: "/dashboard",
       label: "Others",
-      icon: <Aperture />,
+      icon: () => <Aperture />,
     },
     {
       href: "/dashboard",
       label: "Notification",
-      icon: <Bell />,
+      icon: () => <Bell />,
     },
   ];
 
@@ -117,7 +117,7 @@ function Header() {
             {routes.map((route, i) => (
               // <ItemLink label={label} icon={icon} href={href} />
               <Button variant="ghost" key={i} className="space-x-1">
-                <span>{route.icon}</span>
+                <span>{route.icon()}</span>
 
                 <Link
                   key={i}
@@ -145,6 +145,6 @@ function Header() {
       </div>
     </header>
   );
-}
+};
 
 export default Header;
