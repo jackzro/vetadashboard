@@ -94,7 +94,7 @@ function BranchSide({ iotgateway }: any) {
                     selected={date}
                     dateFormat="MM/yyyy"
                     onChange={handleBillingByDate}
-                    customInput={<CustomInputCalender />}
+                    // customInput={<CustomInputCalender />}
                   />
                   {data["daily_energy_usage"].length !== 0 ? (
                     <Button onClick={downloadInvoice} className="bg-veta">
