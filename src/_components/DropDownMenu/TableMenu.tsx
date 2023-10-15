@@ -43,8 +43,9 @@ export function ComboboxTypeEnergyView({ value, setValue }: any) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[250px] justify-between border-black"
         >
+          {value ? <label className="text-orange-700"> Filter : </label> : null}
           {value
             ? typeEnergyView.find((type) => type.value === value)?.label
             : "Select Type..."}

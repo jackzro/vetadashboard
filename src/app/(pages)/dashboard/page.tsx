@@ -19,10 +19,10 @@ function Dashboard() {
   }, [company, isLoading, setCompanies]);
 
   return (
-    <main className="flex h-screen">
+    <main className="flex">
       {isLoading === false && (
         <>
-          <Sidebar company={company} />
+          {/* <Sidebar company={company} /> */}
           {isBranch?.status === false ? (
             <MainSide />
           ) : (

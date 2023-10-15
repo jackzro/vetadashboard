@@ -37,12 +37,15 @@ export function DataTable<TData, TValue>({ columns, data }: any) {
     <div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader className="dark:border-white border-black border-y-2">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className="text-xl font-bold dark:text-white text-black"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -55,10 +58,11 @@ export function DataTable<TData, TValue>({ columns, data }: any) {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="dark:border-white border-black border-y-2 ">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className="dark:border-white border-black border-y-2"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
@@ -85,12 +89,13 @@ export function DataTable<TData, TValue>({ columns, data }: any) {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end space-x-2 py-4 text-black dark:text-white">
         <Button
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          className="border-black border-2"
         >
           Previous
         </Button>
@@ -99,6 +104,7 @@ export function DataTable<TData, TValue>({ columns, data }: any) {
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          className="border-black border-2"
         >
           Next
         </Button>

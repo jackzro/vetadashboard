@@ -37,7 +37,7 @@ function MainSide() {
     <>
       {Object.values(company).length !== 0 ? (
         <div className="w-full">
-          <div className="grid md:grid md:grid-cols-2 md: grid-rows-2 gap-2 px-4 py-4">
+          <div className="grid md:grid md:grid-cols-2 md: grid-rows-2 gap-8 px-4 py-4">
             <Card
               value={company.branches_list.length}
               placeholder={"Total Branch"}
@@ -70,7 +70,7 @@ function MainSide() {
               <SigmaSquare className="w-12 h-12 " />
             </Card>
           </div>
-          <div>
+          <div className="px-6">
             <MapGoogle data={generatePosition()} />
           </div>
         </div>

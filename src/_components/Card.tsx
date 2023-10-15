@@ -9,7 +9,7 @@ interface CardDetail {
 
 function Card({ children, value, placeholder, unit }: CardDetail) {
   return (
-    <div className="border border-black rounded-md">
+    <div className="border border-veta rounded-2xl">
       <div className="flex items-center justify-center space-x-2 py-2">
         {children}
         <div className="flex flex-col">

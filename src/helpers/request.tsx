@@ -46,10 +46,10 @@ const ApiClient = () => {
       return request;
     },
     (error) => {
-      console.error(`API Error: `, error);
       throw error;
     }
   );
+
   return instance;
 };
 

@@ -23,6 +23,7 @@ function Login() {
 
   const login = async (data: any, e: any) => {
     e.preventDefault();
+    setDisable(true);
     try {
       const res = await signIn("credentials", {
         email: data.email,
@@ -33,6 +34,7 @@ function Login() {
 
       //@ts-ignore
       if (res?.error !== null) {
+        setDisable(false);
         toast.error("Incorrect Login Details!!");
       } else {
         setDisable(false);
@@ -46,7 +48,7 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-gray-400 to-gray-700">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-green-600 to-veta">
       <form
         onSubmit={handleSubmit(login)}
         className="flex flex-col p-4 rounded-md items-center justify-center lg:w-[30%] w-[80%] sm:w-[50%] bg-slate-200"
@@ -61,22 +63,28 @@ function Login() {
           />
         </div>
 
-        <span className="text-sm flex flex-col items-center justify-center p-2 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-yellow-600">
+        <span className="text-sm flex flex-col items-center justify-center p-2 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-veta to-emerald-500">
           <label>Empowering Change Through </label>
           <p>Green Technology</p>
         </span>
 
-        <span className="min-w-full space-y-2 py-2">
+        <span className="min-w-full space-y-2 py-2 text-black">
           <label>Username : </label>
-          <Input {...register("email")} type="text" placeholder="Email" />
+          <Input
+            {...register("email")}
+            type="text"
+            placeholder="Email"
+            className="bg-white text-black"
+          />
         </span>
 
-        <span className="min-w-full space-y-2 py-2">
+        <span className="min-w-full space-y-2 py-2 text-black">
           <label>Password : </label>
           <Input
             {...register("password")}
             type="password"
             placeholder="Password"
+            className="bg-white text-black"
           />
         </span>
 

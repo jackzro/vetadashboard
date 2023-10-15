@@ -40,11 +40,7 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
   };
 
   return (
-    <Collapsible
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      className="space-y-2 border-b-4"
-    >
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
       <div className="flex items-center">
         <div>
           <CollapsibleTrigger asChild>
@@ -58,15 +54,21 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
             </Button>
           </CollapsibleTrigger>
         </div>
-        <div className="flex space-x-2">
+        <div
+          className={`flex space-x-2 ${
+            isSelected === pt.company
+              ? "font-semibold bg-veta p-2 rounded-lg my-2"
+              : null
+          }`}
+        >
           <span>
             <Building2 className="h-4 w-4" />
           </span>
 
           <h4
-            className={`text-xs  ${
-              isSelected === pt.company ? "font-semibold" : null
-            }  cursor-pointer`}
+            className={`text-xs cursor-pointer ${
+              isSelected === pt.company && "text-white"
+            }`}
             onClick={setMainPage}
           >
             {pt.company}
@@ -74,16 +76,19 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
         </div>
       </div>
       <CollapsibleContent className="space-y-2">
-        <ul className="ml-10 list-disc cursor-pointer">
+        <ul className="ml-10 list-none cursor-pointer ">
           {pt.branches_list.map((data: any) => (
             <li
-              className={`text-sm ${
-                isSelected === data.company_branch ? "font-semibold" : null
+              className={`text-sm flex space-x-2 ${
+                isSelected === data.company_branch
+                  ? "font-semibold bg-veta p-2 text-white rounded-lg mb-2 "
+                  : null
               }`}
               onClick={() => setBranchPage(data)}
               key={data.company_branch}
             >
-              {data.company_branch}
+              <Building2 className="h-4 w-4 text-black dark:text-white" />
+              <p>{data.company_branch}</p>
             </li>
           ))}
         </ul>

@@ -49,7 +49,6 @@ export const authOptions: NextAuthOptions = {
             cognitoUser,
             authenticationDetails
           );
-          console.log(result);
           //@ts-ignore
           let res = {
             //@ts-ignore
