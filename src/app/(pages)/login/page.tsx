@@ -23,7 +23,7 @@ function Login() {
 
   useEffect(() => {
     if (status === "authenticated") router.push("/dashboard");
-  }, []);
+  }, [status, router]);
 
   const login = async (data: any, e: any) => {
     e.preventDefault();
