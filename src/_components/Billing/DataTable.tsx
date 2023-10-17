@@ -44,7 +44,7 @@ function DataTable<TData, TValue>({ columns, data }: any) {
                   return (
                     <TableHead
                       key={header.id}
-                      className="text-lg px-20 font-bold dark:text-white text-black border-black border-b-[1px]"
+                      className="text-lg px-10 font-bold dark:text-white text-black border-black border-b-[1px]"
                     >
                       {header.isPlaceholder
                         ? null
@@ -62,12 +62,12 @@ function DataTable<TData, TValue>({ columns, data }: any) {
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                  className="dark:border-white border-black border-b-[1px] "
+                  className="dark:border-white border-black border-b-[1px]"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="text-lg px-20">
+                    <TableCell key={cell.id} className="text-lg px-10">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

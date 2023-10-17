@@ -75,8 +75,6 @@ function BranchSide({ iotgateway }: any) {
     }
   };
 
-  console.log(isError);
-
   return (
     <div className="container mx-auto py-2 dark:bg-zinc-800">
       {isLoading === false && data !== undefined ? (
