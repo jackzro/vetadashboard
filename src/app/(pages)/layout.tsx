@@ -1,13 +1,19 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import ReactQueryProvider from "@/utils/ReactQueryProvider";
 import { ThemeProvider } from "@/_components/ThemeProvide";
 import NextAuthSessionProvider from "@/utils/AuthProvider";
 import { getServerSession } from "next-auth";
 import SessionProvider from "@/utils/SessionProvider";
 import { Toaster } from "react-hot-toast";
+
 const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "VSE Solar Panel",
@@ -27,11 +33,11 @@ export default async function RootLayout({
       suppressHydrationWarning
       // className={classNames(fontSans.variable, "light")}
     >
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <ReactQueryProvider>
           {/* <NextAuthSessionProvider> */}
           <SessionProvider session={session}>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="system">
               {children}
               <Toaster />
             </ThemeProvider>

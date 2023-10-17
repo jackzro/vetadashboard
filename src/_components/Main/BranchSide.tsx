@@ -3,7 +3,14 @@
 import { Button } from "@/components/ui/button";
 import { CalDate } from "@/components/ui/caldate";
 import { useGenerateInvoice, useGetBilling } from "@/services/company";
-import { Cable, CalendarDays, Receipt, Sunrise, Zap } from "lucide-react";
+import {
+  Cable,
+  CalendarDays,
+  Loader2,
+  Receipt,
+  Sunrise,
+  Zap,
+} from "lucide-react";
 import React, { forwardRef } from "react";
 import { columns } from "../Billing/Column";
 import { columnsSummary } from "../Billing/ColumnSummary";
@@ -20,7 +27,7 @@ function BranchSide({ iotgateway }: any) {
     (new Date().getMonth() + 1).toString()
   );
   const [year, setyear] = React.useState(new Date().getFullYear().toString());
-  const { data, isLoading, refetch } = useGetBilling(
+  const { data, isLoading, refetch, isError } = useGetBilling(
     iotgateway.serial_number,
     month,
     year
@@ -68,23 +75,25 @@ function BranchSide({ iotgateway }: any) {
     }
   };
 
+  console.log(isError);
+
   return (
     <div className="container mx-auto py-2 dark:bg-zinc-800">
       {isLoading === false && data !== undefined ? (
         <>
-          <div className="py-2 flex flex-col sm:flex-row justify-between">
+          <div className="py-2 flex flex-col sm:flex-row justify-between space-y-4">
             <div className="space-y-2 flex flex-col">
               <span className="space-y-2 flex flex-col">
                 <span>
-                  <p className="text-xl font-bold"> ID Gateway : </p>
+                  <p className="text-2xl font-bold"> ID Gateway : </p>
                 </span>
                 <span>
-                  <p>{data.serial_number}</p>
+                  <p className="text-xl font-normal">{data.serial_number}</p>
                 </span>
               </span>
               <span className="space-y-2">
                 <span>
-                  <p className="text-xl font-bold">Select Billing Month : </p>
+                  <p className="text-2xl font-bold">Select Billing Month : </p>
                 </span>
 
                 <span className="flex space-x-2">
@@ -108,21 +117,21 @@ function BranchSide({ iotgateway }: any) {
             <div className="space-y-2">
               <span className="flex items-center space-x-2 ">
                 <Zap className="h-8 w-8 font-bold" />
-                <p className="text-xl font-bold"> Total: </p>
-                <p>{calculateTotal()} kWh</p>
+                <p className="text-2xl font-bold"> Total: </p>
+                <p className="text-xl font-normal">{calculateTotal()} kWh</p>
               </span>
 
               <span className="flex items-center space-x-2">
                 <Receipt className="h-8 w-8 font-bold" />
-                <p className="text-xl font-bold">Bill Time :</p>
-                <p>
+                <p className="text-2xl font-bold">Bill Time :</p>
+                <p className="text-xl font-normal">
                   {data.month}-{data.year}
                 </p>
               </span>
               <span className="flex items-center space-x-2">
                 <Cable className="h-8 w-8 font-bold" />
-                <p className="text-xl font-bold"> PLTS Capacity : </p>
-                <p>{data.plts_capacity} kWh</p>
+                <p className="text-2xl font-bold"> PLTS Capacity : </p>
+                <p className="text-xl font-normal">{data.plts_capacity} kWh</p>
               </span>
             </div>
           </div>
@@ -147,19 +156,25 @@ function BranchSide({ iotgateway }: any) {
                 </p>
               </span>
 
-              <DataTable
-                columns={columnsSummary}
-                data={[data["energy_usage_summary"]]}
-              />
-              <DataTable
-                columns={columnsSummaryGrid}
-                data={[data["energy_usage_summary"]]}
-              />
+              <span className="flex flex-col space-y-10">
+                <DataTable
+                  columns={columnsSummary}
+                  data={[data["energy_usage_summary"]]}
+                />
+                <DataTable
+                  columns={columnsSummaryGrid}
+                  data={[data["energy_usage_summary"]]}
+                />
+              </span>
             </>
           )}
         </>
+      ) : isError ? (
+        <div>Belum ada Data</div>
       ) : (
-        <div>Belum ada Data </div>
+        <div className="min-w-full h-screen flex justify-center items-center">
+          <Loader2 className="h-32 w-32 animate-spin" />
+        </div>
       )}
     </div>
   );

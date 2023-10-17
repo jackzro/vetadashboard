@@ -10,10 +10,13 @@ import { Menu } from "lucide-react";
 
 function Sidebar({ type }: any) {
   const { data: company, isLoading } = useGetCompany();
-  const [isSelected, setIsSelected] = React.useState("");
+  const [isSelected, setIsSelected] = React.useState({
+    company: "",
+    branch: "",
+  });
 
   return (
-    <div className="sm:bg-abu sm:dark:bg-gray-700 sm:px-3 sm:py-5 sm:flex flex-col items-center h-full">
+    <div className="sm:bg-abu sm:dark:bg-gray-700 sm:px-3 sm:py-5 md:w-[287px] sm:flex flex-col items-center h-full">
       <div className="sm:block h-[60px] w-[180px] hidden">
         <Link href="/dashboard">
           <Image
@@ -29,7 +32,7 @@ function Sidebar({ type }: any) {
 
       {isLoading === false ? (
         type !== "header" ? (
-          <div className="sm:flex flex-col pt-6 px-2 h-screen hidden">
+          <div className="sm:flex flex-col pt-6 px-2 h-screen hidden space-y-4">
             {company.map((pt: any) => (
               <SideList
                 pt={pt}
@@ -40,7 +43,7 @@ function Sidebar({ type }: any) {
             ))}
           </div>
         ) : (
-          <>
+          <div className="sm:flex flex-col pt-6 px-2 h-screen space-y-4">
             {company.map((pt: any) => (
               <SideList
                 pt={pt}
@@ -49,7 +52,7 @@ function Sidebar({ type }: any) {
                 isSelected={isSelected}
               />
             ))}
-          </>
+          </div>
         )
       ) : null}
     </div>

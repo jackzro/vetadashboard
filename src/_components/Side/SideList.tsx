@@ -23,7 +23,11 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
   const setIsBranch = useCompanyStore((state: any) => state.setIsBranch);
 
   const setMainPage = () => {
-    setIsSelected(pt.company);
+    setIsSelected((prev: any) => ({
+      ...prev,
+      company: pt.company,
+      branch: "",
+    }));
     setCompany(pt);
     setIsBranch({
       status: false,
@@ -32,7 +36,7 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
   };
 
   const setBranchPage = (data: any) => {
-    setIsSelected(data.company_branch);
+    setIsSelected((prev: any) => ({ ...prev, branch: data.company_branch }));
     setIsBranch({
       status: true,
       iotgateway: data.iot_gateway[0],
@@ -42,37 +46,42 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
       <div className="flex items-center">
-        <div>
-          <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm" className="w-9 p-0">
+        <div className="w-[100%]">
+          <CollapsibleTrigger asChild className="min-w-full">
+            <div
+              className={`flex space-x-2 items-center${
+                isSelected.company === pt.company
+                  ? "font-semibold bg-veta px-[9px] py-[15px] rounded-[10px]"
+                  : null
+              }`}
+            >
+              <span className="flex items-center">
+                <span>
+                  <Building2 className="h-5 w-5" />
+                </span>
+              </span>
+              <span>
+                <h4
+                  className={`text-sm font-normal cursor-pointer  ${
+                    isSelected.company === pt.company
+                      ? "text-white"
+                      : "text-black"
+                  }`}
+                  onClick={setMainPage}
+                >
+                  {pt.company}
+                </h4>
+              </span>
+            </div>
+            {/* <Button>
               {isOpen ? (
                 <ChevronDown className="h-4 w-4" />
               ) : (
                 <ChevronRight className="h-4 w-4" />
               )}
               <span className="sr-only">Toggle</span>
-            </Button>
+            </Button> */}
           </CollapsibleTrigger>
-        </div>
-        <div
-          className={`flex space-x-2 ${
-            isSelected === pt.company
-              ? "font-semibold bg-veta p-2 rounded-lg my-2"
-              : null
-          }`}
-        >
-          <span>
-            <Building2 className="h-4 w-4" />
-          </span>
-
-          <h4
-            className={`text-xs cursor-pointer ${
-              isSelected === pt.company && "text-white"
-            }`}
-            onClick={setMainPage}
-          >
-            {pt.company}
-          </h4>
         </div>
       </div>
       <CollapsibleContent className="space-y-2">
@@ -80,14 +89,14 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
           {pt.branches_list.map((data: any) => (
             <li
               className={`text-sm flex space-x-2 ${
-                isSelected === data.company_branch
-                  ? "font-semibold bg-veta p-2 text-white rounded-lg mb-2 "
+                isSelected.branch === data.company_branch
+                  ? "font-semibold italic underline rounded-lg mb-2 "
                   : null
               }`}
               onClick={() => setBranchPage(data)}
               key={data.company_branch}
             >
-              <Building2 className="h-4 w-4 text-black dark:text-white" />
+              {/* <Building2 className="h-4 w-4 text-black dark:text-white" /> */}
               <p>{data.company_branch}</p>
             </li>
           ))}

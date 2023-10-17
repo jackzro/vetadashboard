@@ -102,7 +102,7 @@ const Header = () => {
               />
           </Link>
           </div> */}
-          <nav className="flex items-center w-32 dark:text-white text-black bg-white dark:bg-black rounded-lg">
+          <nav className="flex items-center w-[184px] h-[42px] pl-4 dark:text-white text-black bg-white dark:bg-black rounded-lg">
             <Search className="h-6 w-6 ml-2" />
 
             <Input

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,6 +20,10 @@ function Login() {
   const { data: session, status } = useSession();
   const [disable, setDisable] = React.useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated") router.push("/dashboard");
+  }, []);
 
   const login = async (data: any, e: any) => {
     e.preventDefault();
