@@ -14,13 +14,16 @@ import {
   Bell,
   Search,
 } from "lucide-react";
-import ProfileButton from "./ProfileButton";
+import ProfileButton from "./DropDownMenu/ProfileButton";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Sidebar from "./Side/Sidebar";
 import { useCompanyStore } from "@/store/CompanyStore";
 import { Input } from "@/components/ui/input";
+import NavbarMenu from "./DropDownMenu/NavbarMenu";
+import { routes } from "@/constants/menuHeader";
+import { useSession } from "next-auth/react";
 
 // export const ItemLink = React.memo(({ label, href, icon }: any) => {
 //   return (
@@ -38,30 +41,9 @@ import { Input } from "@/components/ui/input";
 // });
 
 const Header = () => {
+  const { data: session, status } = useSession();
   const companies = useCompanyStore((state: any) => state.companies);
   const { theme, setTheme } = useTheme();
-  const routes = [
-    {
-      href: "/dashboard",
-      label: "Home",
-      icon: () => <Home />,
-    },
-    {
-      href: "/dashboard",
-      label: "Monitor",
-      icon: () => <Monitor />,
-    },
-    {
-      href: "/dashboard",
-      label: "Others",
-      icon: () => <Aperture />,
-    },
-    {
-      href: "/dashboard",
-      label: "Notification",
-      icon: () => <Bell />,
-    },
-  ];
 
   return (
     <header className="flex justify-between py-3 px-1 bg-veta">
@@ -70,7 +52,7 @@ const Header = () => {
           {companies.length !== 0 ? (
             <Sheet>
               <SheetTrigger>
-                <Menu className="h-6 md:hidden w-6 mx-2" />
+                <Menu className="h-6 sm:hidden w-6 mx-2" />
               </SheetTrigger>
               <SheetContent side="left" className="w-[300px] sm:w-[400px]">
                 <nav className="flex flex-col gap-4">
@@ -102,7 +84,7 @@ const Header = () => {
               />
           </Link>
           </div> */}
-          <nav className="flex items-center w-[184px] h-[42px] pl-4 dark:text-white text-black bg-white dark:bg-black rounded-lg">
+          <nav className="hidden sm:flex items-center lg:w-[184px] w-[150px] h-[42px] pl-4 dark:text-white text-black bg-white dark:bg-black rounded-lg">
             <Search className="h-6 w-6 ml-2" />
 
             <Input
@@ -113,9 +95,9 @@ const Header = () => {
         </div>
 
         <div className="flex items-center">
-          <nav className="hidden md:flex items-center text-white">
+          <NavbarMenu />
+          <nav className="hidden lg:flex items-center text-white">
             {routes.map((route, i) => (
-              // <ItemLink label={label} icon={icon} href={href} />
               <Button variant="ghost" key={i} className="space-x-1">
                 <span>{route.icon()}</span>
 
@@ -133,14 +115,14 @@ const Header = () => {
             variant="ghost"
             size="icon"
             aria-label="Toggle Theme"
-            className="mr-6 text-white"
+            className="mx-2 text-white"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
             <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle Theme</span>
           </Button>
-          <ProfileButton />
+          <ProfileButton user={session?.user} />
         </div>
       </div>
     </header>

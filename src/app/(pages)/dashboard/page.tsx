@@ -11,6 +11,7 @@ function Dashboard() {
   const { data: company, isLoading } = useGetCompany();
   const isBranch = useCompanyStore((state: any) => state.isBranch);
   const setCompanies = useCompanyStore((state: any) => state.setCompanies);
+  const Selected = useCompanyStore((state: any) => state.Selected);
 
   React.useEffect(() => {
     if (isLoading === false) {
@@ -24,9 +25,9 @@ function Dashboard() {
         <>
           {/* <Sidebar company={company} /> */}
           {isBranch?.status === false ? (
-            <MainSide />
+            <MainSide pt={Selected.pt} />
           ) : (
-            <BranchSide iotgateway={isBranch?.iotgateway} />
+            <BranchSide iotgateway={isBranch?.iotgateway} selected={Selected} />
           )}
         </>
       )}

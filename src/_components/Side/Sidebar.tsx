@@ -16,7 +16,7 @@ function Sidebar({ type }: any) {
   });
 
   return (
-    <div className="sm:bg-abu sm:dark:bg-gray-700 sm:px-3 sm:py-5 md:w-[287px] sm:flex flex-col items-center h-full">
+    <div className="sm:bg-abu sm:dark:bg-gray-700 sm:px-3 sm:py-5 md:w-[287px] md:flex flex-col items-center h-full">
       <div className="sm:block h-[60px] w-[180px] hidden">
         <Link href="/dashboard">
           <Image

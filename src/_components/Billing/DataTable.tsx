@@ -35,7 +35,7 @@ function DataTable<TData, TValue>({ columns, data }: any) {
 
   return (
     <div>
-      <div className="rounded-lg border-[1px] border-black">
+      <div className="rounded-lg border-[1px] border-black dark:border-white">
         <Table>
           <TableHeader className="dark:border-white">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -44,7 +44,7 @@ function DataTable<TData, TValue>({ columns, data }: any) {
                   return (
                     <TableHead
                       key={header.id}
-                      className="text-lg px-10 font-bold dark:text-white text-black border-black border-b-[1px]"
+                      className="text-lg px-10 font-bold dark:text-white text-black border-black dark:border-white border-b-[1px]"
                     >
                       {header.isPlaceholder
                         ? null
@@ -98,7 +98,7 @@ function DataTable<TData, TValue>({ columns, data }: any) {
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="border-black border-2"
+            className="border-black border-2 dark:border-white"
           >
             Previous
           </Button>
@@ -107,7 +107,7 @@ function DataTable<TData, TValue>({ columns, data }: any) {
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className="border-black border-2"
+            className="border-black border-2 dark:border-white"
           >
             Next
           </Button>

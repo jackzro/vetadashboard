@@ -21,6 +21,8 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
 
   const setCompany = useCompanyStore((state: any) => state.setCompany);
   const setIsBranch = useCompanyStore((state: any) => state.setIsBranch);
+  const updatePT = useCompanyStore((state: any) => state.updatePT);
+  const updateBranch = useCompanyStore((state: any) => state.updateBranch);
 
   const setMainPage = () => {
     setIsSelected((prev: any) => ({
@@ -28,6 +30,9 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
       company: pt.company,
       branch: "",
     }));
+    updatePT({
+      pt: pt.company,
+    });
     setCompany(pt);
     setIsBranch({
       status: false,
@@ -41,10 +46,17 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
       status: true,
       iotgateway: data.iot_gateway[0],
     });
+    updateBranch({
+      branch: data.company_branch,
+    });
   };
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
+    <Collapsible
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      className="space-y-2 sm:px-2"
+    >
       <div className="flex items-center">
         <div className="w-[100%]">
           <CollapsibleTrigger asChild className="min-w-full">
@@ -63,9 +75,7 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
               <span>
                 <h4
                   className={`text-sm font-normal cursor-pointer  ${
-                    isSelected.company === pt.company
-                      ? "text-white"
-                      : "text-black"
+                    isSelected.company === pt.company ? "text-white" : null
                   }`}
                   onClick={setMainPage}
                 >

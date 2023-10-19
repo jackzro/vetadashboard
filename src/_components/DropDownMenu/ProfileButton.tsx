@@ -9,14 +9,18 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { signOut } from "next-auth/react";
 
-const ProfileButton = () => {
+const ProfileButton = ({ user }: any) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="flex items-center justify-center space-x-2">
         <Avatar>
           <AvatarImage src="/img/shadcn.jpeg" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
+
+        <span className="text-xl text-white">
+          <h1>{user["cognito:username"]}</h1>
+        </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>

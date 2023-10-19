@@ -13,6 +13,10 @@ export const useCompanyStore = create((set) => ({
     status: false,
     iotgateway: {},
   },
+  Selected: {
+    pt: "",
+    branch: "",
+  },
 
   setCompanies: (companies: any) =>
     set((state: any) => ({ companies: [...state.companies, companies] })),
@@ -21,5 +25,11 @@ export const useCompanyStore = create((set) => ({
   },
   setIsBranch: (status: any) => {
     set((state: any) => ({ isBranch: status }));
+  },
+  updatePT: ({ pt }: any) => {
+    set((state: any) => ({ Selected: { ...state.Selected, pt: pt } }));
+  },
+  updateBranch: ({ branch }: any) => {
+    set((state: any) => ({ Selected: { ...state.Selected, branch: branch } }));
   },
 }));

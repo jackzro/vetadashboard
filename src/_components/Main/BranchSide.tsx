@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { CalDate } from "@/components/ui/caldate";
 import { useGenerateInvoice, useGetBilling } from "@/services/company";
 import {
+  BuildingIcon,
   Cable,
   CalendarDays,
+  Home,
   Loader2,
   Receipt,
   Sunrise,
@@ -20,7 +22,7 @@ import DataTable from "../Billing/DataTable";
 import { ComboboxTypeEnergyView } from "../DropDownMenu/TableMenu";
 import CustomInputCalender from "../CustomCalenderInput";
 
-function BranchSide({ iotgateway }: any) {
+function BranchSide({ iotgateway, selected }: any) {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [type, setType] = React.useState("energy captured");
   const [month, setmonth] = React.useState(
@@ -76,64 +78,87 @@ function BranchSide({ iotgateway }: any) {
   };
 
   return (
-    <div className="container mx-auto py-2 dark:bg-zinc-800">
+    <div className="container mx-auto py-2">
       {isLoading === false && data !== undefined ? (
         <>
-          <div className="py-2 flex flex-col sm:flex-row justify-between space-y-4">
-            <div className="space-y-2 flex flex-col">
-              <span className="space-y-2 flex flex-col">
-                <span>
-                  <p className="text-2xl font-bold"> ID Gateway : </p>
-                </span>
-                <span>
-                  <p className="text-xl font-normal">{data.serial_number}</p>
-                </span>
-              </span>
-              <span className="space-y-2">
-                <span>
-                  <p className="text-2xl font-bold">Select Billing Month : </p>
-                </span>
-
-                <span className="flex space-x-2">
-                  <CalDate
-                    className="border-2 w-[75%] text-center border-white rounded-xl bg-black text-sm"
-                    showMonthYearPicker
-                    selected={date}
-                    dateFormat="MM/yyyy"
-                    onChange={handleBillingByDate}
-                    customInput={<CustomInputCalender />}
-                  />
-                  {data["daily_energy_usage"].length !== 0 ? (
-                    <Button onClick={downloadInvoice} className="bg-veta">
-                      Export
-                    </Button>
-                  ) : null}
-                </span>
-              </span>
-            </div>
-
-            <div className="space-y-2">
-              <span className="flex items-center space-x-2 ">
-                <Zap className="h-8 w-8 font-bold" />
-                <p className="text-2xl font-bold"> Total: </p>
-                <p className="text-xl font-normal">{calculateTotal()} kWh</p>
-              </span>
-
+          <div className="py-10">
+            <span className="text-black text-[34px] font-bold dark:text-white">
+              <h4>Energy Data</h4>
+            </span>
+            <span className="flex flex-col lg:flex-row item-center lg:space-x-2 text-gray-400 dark:text-white">
               <span className="flex items-center space-x-2">
-                <Receipt className="h-8 w-8 font-bold" />
-                <p className="text-2xl font-bold">Bill Time :</p>
-                <p className="text-xl font-normal">
-                  {data.month}-{data.year}
-                </p>
+                <Home className="h-[20px] w-6" />
+                <h1 className="text-2xl">Home </h1>
+                <h1 className="text-2xl">/</h1>
               </span>
               <span className="flex items-center space-x-2">
-                <Cable className="h-8 w-8 font-bold" />
-                <p className="text-2xl font-bold"> PLTS Capacity : </p>
-                <p className="text-xl font-normal">{data.plts_capacity} kWh</p>
+                <span>
+                  <BuildingIcon className="h-[20px] w-6" />
+                </span>
+                <h1 className="text-2xl">{selected.pt} </h1>&nbsp;&nbsp;
+                <h1 className="text-2xl"> /</h1>
               </span>
-            </div>
+
+              <span>
+                <h1 className="text-2xl text-black dark:text-white">
+                  {selected.branch}
+                </h1>
+              </span>
+            </span>
           </div>
-          <div className="py-6">
+          {/* <div className="py-2 flex flex-col sm:flex-row justify-between space-y-4"> */}
+          <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-2">
+            <span className="space-y-2 flex flex-col">
+              <span>
+                <p className="text-2xl font-bold"> ID Gateway : </p>
+              </span>
+              <span>
+                <p className="text-xl font-normal">{data.serial_number}</p>
+              </span>
+            </span>
+            <span className="flex items-center space-x-2 ">
+              <Zap className="h-8 w-8 font-bold" />
+              <p className="text-2xl font-bold"> Total: </p>
+              <p className="text-xl font-normal">{calculateTotal()} kWh</p>
+            </span>
+
+            <span className="flex items-center space-x-2">
+              <Receipt className="h-8 w-8 font-bold" />
+              <p className="text-2xl font-bold">Bill Time :</p>
+              <p className="text-xl font-normal">
+                {data.month}-{data.year}
+              </p>
+            </span>
+            <span className="flex items-center space-x-2">
+              <Cable className="h-8 w-8 font-bold" />
+              <p className="text-2xl font-bold"> PLTS Capacity : </p>
+              <p className="text-xl font-normal">{data.plts_capacity} kWh</p>
+            </span>
+          </div>
+          {/* </div> */}
+          <div className="mt-8 flex flex-col space-y-2">
+            <span className="space-y-2">
+              <span>
+                <p className="text-2xl font-bold">Select Billing Month : </p>
+              </span>
+            </span>
+            <span className="flex space-x-2">
+              <CalDate
+                className="border-2 w-[75%] text-center border-white rounded-xl bg-black text-sm"
+                showMonthYearPicker
+                selected={date}
+                dateFormat="MM/yyyy"
+                onChange={handleBillingByDate}
+                customInput={<CustomInputCalender />}
+              />
+              {data["daily_energy_usage"].length !== 0 ? (
+                <Button onClick={downloadInvoice} className="bg-veta">
+                  Export Billing
+                </Button>
+              ) : null}
+            </span>
+          </div>
+          <div className="py-3">
             <ComboboxTypeEnergyView value={type} setValue={setType} />
           </div>
           {type === "energy captured" || type === "energy usage" ? (

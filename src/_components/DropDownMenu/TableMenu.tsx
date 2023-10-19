@@ -43,7 +43,7 @@ export function ComboboxTypeEnergyView({ value, setValue }: any) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[250px] justify-between border-black"
+          className="w-[250px] justify-between border-black dark:bg-white dark:text-black"
         >
           {value ? <label className="text-orange-700"> Filter : </label> : null}
           {value
