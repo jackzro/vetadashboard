@@ -49,13 +49,13 @@ function MainSide({ pt }: any) {
               <h4>Dashboard</h4>
             </span>
             <span className="flex flex-col md:flex-row item-center space-x-2 text-gray-400 dark:text-white">
-              <span className="flex items-center space-x-2">
+              <span className="flex items-center space-x-2 cursor-pointer">
                 <Home className="h-[20px] w-6" />
                 <h1 className="text-xl">Home </h1>
                 <h1 className="text-xl">/</h1>
               </span>
 
-              <span className="flex items-center text-black dark:text-white space-x-2">
+              <span className="flex items-center text-black dark:text-white space-x-2 cursor-pointer">
                 <BuildingIcon className="h-[20px] w-6" />
                 <h1 className="text-xl text-black dark:text-white">{pt}</h1>
               </span>

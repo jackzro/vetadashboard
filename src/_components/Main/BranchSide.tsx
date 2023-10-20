@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 function BranchSide({ iotgateway, selected }: any) {
   const router = useRouter();
   const setIsBranch = useCompanyStore((state: any) => state.setIsBranch);
+  const updateBranch = useCompanyStore((state: any) => state.updateBranch);
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [type, setType] = React.useState("energy captured");
   const [month, setmonth] = React.useState(
@@ -80,10 +81,10 @@ function BranchSide({ iotgateway, selected }: any) {
             <span className="text-black text-[32px] font-bold dark:text-white">
               <h4>Energy Data</h4>
             </span>
-            <span className="flex flex-col lg:flex-row item-center lg:space-x-2 text-gray-400 dark:text-white">
+            <span className="flex flex-col lg:flex-row item-center lg:space-x-2 text-gray-400 dark:text-white cursor-pointer">
               <span
                 className="flex items-center space-x-2"
-                onClick={() => router.push("/dashboard/home")}
+                // onClick={() => router.push("/dashboard/home")}
               >
                 <Home className="h-[20px] w-6" />
                 <h1 className="text-xl">Home </h1>
@@ -92,12 +93,15 @@ function BranchSide({ iotgateway, selected }: any) {
 
               <span
                 className="flex items-center space-x-2"
-                onClick={() =>
+                onClick={() => {
+                  updateBranch({
+                    branch: "",
+                  });
                   setIsBranch({
                     status: false,
                     iotgateway: {},
-                  })
-                }
+                  });
+                }}
               >
                 <span>
                   <BuildingIcon className="h-[20px] w-6" />

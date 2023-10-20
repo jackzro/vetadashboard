@@ -18,6 +18,7 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
   const setIsBranch = useCompanyStore((state: any) => state.setIsBranch);
   const updatePT = useCompanyStore((state: any) => state.updatePT);
   const updateBranch = useCompanyStore((state: any) => state.updateBranch);
+  const Selected = useCompanyStore((state: any) => state.Selected);
 
   useEffect(() => {
     if (pathname !== "/dashboard") {
@@ -117,7 +118,7 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
           {pt.branches_list.map((data: any) => (
             <li
               className={`text-sm flex space-x-2 ${
-                isSelected.branch === data.company_branch
+                Selected.branch === data.company_branch
                   ? "font-semibold italic underline rounded-lg mb-2 "
                   : null
               }`}
