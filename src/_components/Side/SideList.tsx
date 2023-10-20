@@ -1,30 +1,40 @@
 "use client";
 
-import {
-  Building2,
-  ChevronsUpDown,
-  ChevronRight,
-  ChevronDown,
-} from "lucide-react";
-import React from "react";
+import { Building2 } from "lucide-react";
+import React, { useEffect } from "react";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
+import { usePathname, useRouter } from "next/navigation";
 import { useCompanyStore } from "@/store/CompanyStore";
-import { useQueryClient } from "@tanstack/react-query";
 
 function SideList({ pt, setIsSelected, isSelected }: any) {
   const [isOpen, setIsOpen] = React.useState(false);
-
+  const pathname = usePathname();
+  const router = useRouter();
   const setCompany = useCompanyStore((state: any) => state.setCompany);
   const setIsBranch = useCompanyStore((state: any) => state.setIsBranch);
   const updatePT = useCompanyStore((state: any) => state.updatePT);
   const updateBranch = useCompanyStore((state: any) => state.updateBranch);
 
+  useEffect(() => {
+    if (pathname !== "/dashboard") {
+      setIsSelected((prev: any) => ({
+        ...prev,
+        company: "",
+        branch: "",
+      }));
+      setIsOpen(false);
+    }
+  }, [pathname, setIsSelected, setIsOpen]);
+
   const setMainPage = () => {
+    if (pathname !== "/dashboard") {
+      router.push("/dashboard");
+    }
+
     setIsSelected((prev: any) => ({
       ...prev,
       company: pt.company,
@@ -41,7 +51,15 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
   };
 
   const setBranchPage = (data: any) => {
-    setIsSelected((prev: any) => ({ ...prev, branch: data.company_branch }));
+    if (pathname !== "/dashboard") {
+      router.push("/dashboard");
+    }
+
+    setIsSelected((prev: any) => ({
+      ...prev,
+      company: pt.company,
+      branch: data.company_branch,
+    }));
     setIsBranch({
       status: true,
       iotgateway: data.iot_gateway[0],

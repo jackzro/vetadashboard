@@ -45,19 +45,19 @@ function MainSide({ pt }: any) {
       {Object.values(company).length !== 0 ? (
         <div className="w-full">
           <div className="px-8 py-10">
-            <span className="text-black text-[34px] font-bold dark:text-white">
+            <span className="text-black text-[32px] font-bold dark:text-white">
               <h4>Dashboard</h4>
             </span>
             <span className="flex flex-col md:flex-row item-center space-x-2 text-gray-400 dark:text-white">
               <span className="flex items-center space-x-2">
                 <Home className="h-[20px] w-6" />
-                <h1 className="text-2xl">Home </h1>
-                <h1 className="text-2xl">/</h1>
+                <h1 className="text-xl">Home </h1>
+                <h1 className="text-xl">/</h1>
               </span>
 
               <span className="flex items-center text-black dark:text-white space-x-2">
                 <BuildingIcon className="h-[20px] w-6" />
-                <h1 className="text-2xl text-black dark:text-white">{pt}</h1>
+                <h1 className="text-xl text-black dark:text-white">{pt}</h1>
               </span>
             </span>
           </div>

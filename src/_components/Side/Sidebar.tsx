@@ -5,8 +5,6 @@ import SideList from "./SideList";
 import Image from "next/image";
 import Link from "next/link";
 import { useGetCompany } from "@/services/company";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
 
 function Sidebar({ type }: any) {
   const { data: company, isLoading } = useGetCompany();

@@ -13,7 +13,7 @@ function Card({ children, value, placeholder, unit }: CardDetail) {
       <div className="flex items-center justify-center space-x-2 py-2">
         {children}
         <div className="flex flex-col">
-          <p className="text-2xl font-bold">
+          <p className="text-xl font-bold">
             {value} {unit}
           </p>
           <a className="text-xs"> {placeholder}</a>

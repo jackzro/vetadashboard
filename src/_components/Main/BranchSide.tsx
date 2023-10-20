@@ -3,17 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { CalDate } from "@/components/ui/caldate";
 import { useGenerateInvoice, useGetBilling } from "@/services/company";
-import {
-  BuildingIcon,
-  Cable,
-  CalendarDays,
-  Home,
-  Loader2,
-  Receipt,
-  Sunrise,
-  Zap,
-} from "lucide-react";
-import React, { forwardRef } from "react";
+import { BuildingIcon, Cable, Home, Loader2, Receipt, Zap } from "lucide-react";
+import React from "react";
 import { columns } from "../Billing/Column";
 import { columnsSummary } from "../Billing/ColumnSummary";
 import { columnsSummaryGrid } from "../Billing/ColumnSummaryGrid";
@@ -21,8 +12,12 @@ import { columnsUsage } from "../Billing/ColumnUsage";
 import DataTable from "../Billing/DataTable";
 import { ComboboxTypeEnergyView } from "../DropDownMenu/TableMenu";
 import CustomInputCalender from "../CustomCalenderInput";
+import { useCompanyStore } from "@/store/CompanyStore";
+import { useRouter } from "next/navigation";
 
 function BranchSide({ iotgateway, selected }: any) {
+  const router = useRouter();
+  const setIsBranch = useCompanyStore((state: any) => state.setIsBranch);
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [type, setType] = React.useState("energy captured");
   const [month, setmonth] = React.useState(
@@ -82,25 +77,37 @@ function BranchSide({ iotgateway, selected }: any) {
       {isLoading === false && data !== undefined ? (
         <>
           <div className="py-10">
-            <span className="text-black text-[34px] font-bold dark:text-white">
+            <span className="text-black text-[32px] font-bold dark:text-white">
               <h4>Energy Data</h4>
             </span>
             <span className="flex flex-col lg:flex-row item-center lg:space-x-2 text-gray-400 dark:text-white">
-              <span className="flex items-center space-x-2">
+              <span
+                className="flex items-center space-x-2"
+                onClick={() => router.push("/dashboard/home")}
+              >
                 <Home className="h-[20px] w-6" />
-                <h1 className="text-2xl">Home </h1>
-                <h1 className="text-2xl">/</h1>
+                <h1 className="text-xl">Home </h1>
+                <h1 className="text-xl">/</h1>
               </span>
-              <span className="flex items-center space-x-2">
+
+              <span
+                className="flex items-center space-x-2"
+                onClick={() =>
+                  setIsBranch({
+                    status: false,
+                    iotgateway: {},
+                  })
+                }
+              >
                 <span>
                   <BuildingIcon className="h-[20px] w-6" />
                 </span>
-                <h1 className="text-2xl">{selected.pt} </h1>&nbsp;&nbsp;
-                <h1 className="text-2xl"> /</h1>
+                <h1 className="text-xl">{selected.pt} </h1>&nbsp;&nbsp;
+                <h1 className="text-xl"> /</h1>
               </span>
 
               <span>
-                <h1 className="text-2xl text-black dark:text-white">
+                <h1 className="text-xl text-black dark:text-white">
                   {selected.branch}
                 </h1>
               </span>
@@ -110,36 +117,36 @@ function BranchSide({ iotgateway, selected }: any) {
           <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-2">
             <span className="space-y-2 flex flex-col">
               <span>
-                <p className="text-2xl font-bold"> ID Gateway : </p>
+                <p className="text-xl font-bold"> ID Gateway : </p>
               </span>
               <span>
-                <p className="text-xl font-normal">{data.serial_number}</p>
+                <p className="text-lg font-normal">{data.serial_number}</p>
               </span>
             </span>
             <span className="flex items-center space-x-2 ">
               <Zap className="h-8 w-8 font-bold" />
-              <p className="text-2xl font-bold"> Total: </p>
-              <p className="text-xl font-normal">{calculateTotal()} kWh</p>
+              <p className="text-xl font-bold"> Total: </p>
+              <p className="text-lg font-normal">{calculateTotal()} kWh</p>
             </span>
 
             <span className="flex items-center space-x-2">
               <Receipt className="h-8 w-8 font-bold" />
-              <p className="text-2xl font-bold">Bill Time :</p>
-              <p className="text-xl font-normal">
+              <p className="text-xl font-bold">Bill Time :</p>
+              <p className="text-lg font-normal">
                 {data.month}-{data.year}
               </p>
             </span>
             <span className="flex items-center space-x-2">
               <Cable className="h-8 w-8 font-bold" />
-              <p className="text-2xl font-bold"> PLTS Capacity : </p>
-              <p className="text-xl font-normal">{data.plts_capacity} kWh</p>
+              <p className="text-xl font-bold"> PLTS Capacity : </p>
+              <p className="text-lg font-normal">{data.plts_capacity} kWh</p>
             </span>
           </div>
           {/* </div> */}
           <div className="mt-8 flex flex-col space-y-2">
             <span className="space-y-2">
               <span>
-                <p className="text-2xl font-bold">Select Billing Month : </p>
+                <p className="text-xl font-bold">Select Billing Month : </p>
               </span>
             </span>
             <span className="flex space-x-2">

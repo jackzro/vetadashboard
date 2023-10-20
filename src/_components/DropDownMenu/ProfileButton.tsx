@@ -18,7 +18,7 @@ const ProfileButton = ({ user }: any) => {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
 
-        <span className="text-xl text-white">
+        <span className="text-lg text-white">
           <h1>{user["cognito:username"]}</h1>
         </span>
       </DropdownMenuTrigger>

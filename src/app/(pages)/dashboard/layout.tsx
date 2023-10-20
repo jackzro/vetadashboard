@@ -3,7 +3,6 @@ import Sidebar from "@/_components/Side/Sidebar";
 import React from "react";
 
 function LayoutDashboard({ children }: { children: React.ReactNode }) {
-  // const companies = useCompanyStore((state: any) => state.companies);
   return (
     <div className="flex">
       <div className="min-h-screen">

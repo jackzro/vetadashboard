@@ -30,7 +30,7 @@ function DataTable<TData, TValue>({ columns, data }: any) {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    // getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
@@ -90,7 +90,7 @@ function DataTable<TData, TValue>({ columns, data }: any) {
         </Table>
       </div>
 
-      {table.getCanNextPage() === true ||
+      {/* {table.getCanNextPage() === true ||
       table.getCanPreviousPage() === true ? (
         <div className="flex items-center justify-end space-x-2 py-4 text-black dark:text-white">
           <Button
@@ -112,7 +112,7 @@ function DataTable<TData, TValue>({ columns, data }: any) {
             Next
           </Button>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }
