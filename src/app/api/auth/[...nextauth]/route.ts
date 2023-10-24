@@ -2,7 +2,6 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
 import { UserPool } from "@/utils/userPool";
 import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
-import { toast } from "react-hot-toast";
 // import { authOptions } from "@/utils/authOptions";
 
 type loginType = {
@@ -86,6 +85,7 @@ const authOptions: NextAuthOptions = {
       if (user) return { ...token, ...user };
       return token;
     },
+
     async session({ session, token, user }) {
       session.user = token.user as any;
       //@ts-ignore

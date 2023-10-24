@@ -44,6 +44,9 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
     updatePT({
       pt: pt.company,
     });
+    updateBranch({
+      branch: "",
+    });
     setCompany(pt);
     setIsBranch({
       status: false,
@@ -65,6 +68,9 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
       status: true,
       iotgateway: data.iot_gateway[0],
     });
+    updatePT({
+      pt: pt.company,
+    });
     updateBranch({
       branch: data.company_branch,
     });
@@ -80,9 +86,9 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
         <div className="w-[100%]">
           <CollapsibleTrigger asChild className="min-w-full">
             <div
-              className={`flex space-x-2 items-center${
+              className={`flex space-x-2 items-center h-[40px] px-[9px] py-[15px]${
                 isSelected.company === pt.company
-                  ? "font-semibold bg-veta px-[9px] py-[15px] rounded-[10px]"
+                  ? "font-semibold bg-veta  rounded-[10px]"
                   : null
               }`}
             >
