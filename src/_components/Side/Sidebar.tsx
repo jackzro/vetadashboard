@@ -30,7 +30,7 @@ function Sidebar({ type }: any) {
 
       {isLoading === false ? (
         type !== "header" ? (
-          <div className="sm:flex flex-col pt-6 px-2 h-screen hidden space-y-4">
+          <div className="sm:flex flex-col pt-6 px-2 h-screen hidden space-y-2">
             {company.map((pt: any) => (
               <SideList
                 pt={pt}
@@ -41,7 +41,7 @@ function Sidebar({ type }: any) {
             ))}
           </div>
         ) : (
-          <div className="sm:flex flex-col pt-6 px-2 h-screen space-y-4">
+          <div className="sm:flex flex-col pt-6 px-2 h-screen space-y-2">
             {company.map((pt: any) => (
               <SideList
                 pt={pt}

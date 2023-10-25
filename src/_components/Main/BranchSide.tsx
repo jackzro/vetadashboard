@@ -15,7 +15,6 @@ import CustomInputCalender from "../CustomCalenderInput";
 import { useCompanyStore } from "@/store/CompanyStore";
 
 function BranchSide({ iotgateway, selected }: any) {
-  const Selected = useCompanyStore((state: any) => state.Selected);
   const setIsBranch = useCompanyStore((state: any) => state.setIsBranch);
   const updateBranch = useCompanyStore((state: any) => state.updateBranch);
   const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -105,13 +104,13 @@ function BranchSide({ iotgateway, selected }: any) {
                 <span>
                   <BuildingIcon className="h-[20px] w-6" />
                 </span>
-                <h1 className="text-xl">{Selected.pt} </h1>&nbsp;&nbsp;
+                <h1 className="text-xl">{selected.pt} </h1>&nbsp;&nbsp;
                 <h1 className="text-xl"> /</h1>
               </span>
 
               <span>
                 <h1 className="text-xl text-black dark:text-white">
-                  {Selected.branch}
+                  {selected.branch}
                 </h1>
               </span>
             </span>

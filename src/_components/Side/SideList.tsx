@@ -77,16 +77,12 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
   };
 
   return (
-    <Collapsible
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      className="space-y-2 sm:px-2"
-    >
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="sm:px-2">
       <div className="flex items-center">
         <div className="w-[100%]">
           <CollapsibleTrigger asChild className="min-w-full">
             <div
-              className={`flex space-x-2 items-center h-[40px] px-[9px] py-[15px]${
+              className={`flex space-x-2 items-center h-[45px] px-[10px] py-[15px]${
                 isSelected.company === pt.company
                   ? "font-semibold bg-veta  rounded-[10px]"
                   : null
@@ -119,13 +115,17 @@ function SideList({ pt, setIsSelected, isSelected }: any) {
           </CollapsibleTrigger>
         </div>
       </div>
-      <CollapsibleContent className="space-y-2">
-        <ul className="ml-10 list-none cursor-pointer ">
+      <CollapsibleContent>
+        <ul
+          className={`ml-10 list-none cursor-pointer ${
+            isSelected.company === pt.company ? "mt-2" : ""
+          }`}
+        >
           {pt.branches_list.map((data: any) => (
             <li
               className={`text-sm flex space-x-2 ${
                 Selected.branch === data.company_branch
-                  ? "font-semibold italic underline rounded-lg mb-2 "
+                  ? "font-semibold italic underline rounded-lg mb-2"
                   : null
               }`}
               onClick={() => setBranchPage(data)}
